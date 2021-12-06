@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>PhoneBook App</title>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+	</script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<!-- CONTACT FORM -->
+		<div class="container">
+			<div class="row justify-content-md-center">
+			<div class="col">
+					<h3> Phone Book App </h3>
+			</div>
+			</div>
+		</div>
+	<div class="container-fluid">
+		<form class="form-horizontal" th:action="@{/save}" th:object="${contact}" method="post">
+			  <div class="form-group" th:if="${contact.id != null}">
+			    <label class="control-label col-sm-2" for="id">Id:</label>
+			    <div class="col-sm-3">
+			    	<input type="hidden" th:field="${contact.id}" class="form-control" id="id">
+			    	<span class="form-control">[[${contact.id}]]</span>
+			    </div>
+			  </div>
+			  
+			  <div class="form-group">
+			    <label class="control-label col-sm-2" for="name">Name:</label>
+			    <div class="col-sm-3">
+			      <input type="text" th:field="${contact.name}" class="form-control" id="name" 
+			      	placeholder="Enter Name" required minlength="3" maxlength="15">
+			    </div>
+			  </div>
+			  
+			  <div class="form-group">
+			    <label class="control-label col-sm-2" for="email">Email:</label>
+			    <div class="col-sm-3">
+			      <input type="email" th:field="${contact.email}" class="form-control" id="email" placeholder="Enter email">
+			    </div>
+			  </div>
+			  
+			  <div class="form-group">
+			    <label class="control-label col-sm-2" for="phno">Phone Number:</label>
+			    <div class="col-sm-3">
+			      <input type="number" th:field="*{phno}" class="form-control" id="phno" 
+			      	required maxlength="10" placeholder="Enter Phone Number">
+			    </div>
+			  </div>
+			  
+			  <!-- <div class="form-group">
+			    <label class="control-label col-sm-2" for="active">Active:</label>
+			    <div class="col-sm-1">
+			      <input type="checkbox" th:field="*{active}" id="active" />
+			    </div>
+			  </div> -->
+			 
+			  <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <button type="submit" class="btn btn-default">Submit</button>
+			    </div>
+			  </div>
+			  
+			  <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <a th:href="@{/all}" class="btn btn-default">View All Contacts</a>
+			    </div>
+			  </div>
+		</form>
+		
+		<div>
+			<span th:if="${msg != null}">[[${msg}]]</span>
+			<span th:unless="${msg != null}"></span>
+		</div>
+	</div>
+
+</body>
+</html>

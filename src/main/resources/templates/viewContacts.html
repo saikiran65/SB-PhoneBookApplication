@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>PhoneBook App | Contacts</title>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+	</script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<!-- CONTACT FORM -->
+	
+		<div class="text-center">
+			<h3 th:if="${msg != null}">[[${msg}]]</h3>
+			<a th:href="@{/}" class="btn btn-default">Add New Contact</a>
+		</div>
+	
+				<table class="table" th:object="${list}">
+					  <thead class="thead-dark">
+					    <tr>
+					      <th scope="col">Id</th>
+					      <th scope="col">Name</th>
+					      <th scope="col">Email</th>
+					      <th scope="col">Phone</th>
+					      <th scope="col">Actions</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr th:each="contact : ${list}" th:if="${contact.active == true}">
+					      <th scope="row">[[${contact.id}]]</th>
+					      <td>[[${contact.name}]]</td>
+					      <td>[[${contact.email}]]</td>
+					      <td>[[${contact.phno}]]</td>
+					      <!-- <td>[[${contact.active}]]</td> -->
+					      <td> <a th:href="@{'/edit/' + ${contact.id}}" class="btn btn-default" >Edit</a></td>
+					      <td> <a th:href="@{'/delete/' + ${contact.id}}" class="btn btn-default" onclick="return delConfirmation();">Delete</a></td>
+					    </tr>
+					    
+					  </tbody>
+				</table>
+				
+				<div class="text-center">
+					<h3 th:if="${deleteMsg != null}">[[${deleteMsg}]]</h3>
+				</div>
+				
+<script type="text/javascript">
+ function delConfirmation(){
+	return confirm("Are you sure, you want to delete?");
+ }
+</script>				
+
+</body>
+</html>
